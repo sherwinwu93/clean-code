@@ -63,27 +63,25 @@ public class Args {
 
     private void validateSchemaElementId(char elementId) throws ParseException {
         if (!Character.isLetter(elementId)) {
-
+            throw new ParseException(
+                    "Bad character:" + elementId + " in Args format: " + schema, 0);
         }
-    }
-
-    private boolean isStringSchemaElement(String elementTail) {
-
     }
 
     private void parseStringSchemaElement(char elementId) {
+        stringArgs.put(elementId, "");
+    }
 
+    private boolean isStringSchemaElement(String elementTail) {
+        return elementTail.equals("");
     }
 
     private boolean isBooleanSchemaElement(String elementTail) {
-
+        return elementTail.length() == 0;
     }
 
     private void parseBooleanSchemaElement(char elementId) {
-        char c = element.charAt(0);
-        if (Character.isLetter(c)) {
-            booleanArgs.put(c, false);
-        }
+        booleanArgs.put(elementId, false);
     }
 
     private boolean parseArguments() {

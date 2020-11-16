@@ -7,17 +7,22 @@ import static c14.author.ErrorCode.INVALID_ARGUMENT_NAME;
 import static c14.author.ErrorCode.UNEXPECTED_ARGUMENT;
 
 public class Args {
+    //容器
     private Map<Character, ArgumentMarshaler> marshalers;
 
+    //账本
     private Set<Character> argsFound;
 
+    //要装的物品 -p 3303
     private ListIterator<String> currentArgument;
 
     public Args(String schema, String[] args) throws ArgsException {
         marshalers = new HashMap<>();
         argsFound = new HashSet<>();
 
+        //处理格式化字符串:根据格式化字符串,确定有哪些容器
         parseSchema(schema);
+        //处置参数值:向对于的容器添加值,并记录在账本上
         parseArgumentStrings(Arrays.asList(args));
     }
 
@@ -56,6 +61,7 @@ public class Args {
             if (argString.startsWith("-")) {
                 parseArgumentCharacters(argString.substring(1));
             } else {
+                //只要输入不对,就直接跳出
                 currentArgument.previous();
                 break;
             }

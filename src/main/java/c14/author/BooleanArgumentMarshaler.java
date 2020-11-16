@@ -3,6 +3,7 @@ package c14.author;
 import java.util.ListIterator;
 
 public class BooleanArgumentMarshaler implements ArgumentMarshaler {
+    //这种命名值得学习
     private boolean booleanValue = false;
 
     @Override
